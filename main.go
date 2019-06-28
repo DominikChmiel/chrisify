@@ -59,8 +59,14 @@ func main() {
 		if newFace == nil {
 			panic("nil face")
 		}
-		chrisFace := imaging.Fit(newFace, rect.Dx(), rect.Dy(), imaging.Lanczos)
 
+		resizedFace := imaging.Resize(newFace, rect.Dx(), 0, imaging.Lanczos)
+		chrisFace := imaging.Fit(resizedFace, rect.Dx(), rect.Dy(), imaging.Lanczos)
+
+		print("Srcbounds:", newFace.Bounds().Dx(), "x", newFace.Bounds().Dy(), "\n")
+		print("Scaled:\n");
+		print(rect.Dx(), "x", rect.Dy(), "\n")
+		print(chrisFace.Bounds().Dx(), "x", chrisFace.Bounds().Dy(), "\n")
 		draw.Draw(
 			canvas,
 			rect,
